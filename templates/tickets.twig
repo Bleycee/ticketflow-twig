@@ -1,0 +1,141 @@
+{% extends "layout.twig" %}
+
+{% block title %}Ticket Management - TicketFlow{% endblock %}
+
+{% block content %}
+<div class="ticket-page">
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-content">
+                    <a href="/dashboard.php" class="logo">TicketFlow</a>
+                    <div class="nav-buttons">
+                        <a href="/dashboard.php" class="btn-start">Dashboard</a>
+                        <a href="/logout.php" class="btn-logout">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="ticket-content">
+        <div class="container">
+            <div class="ticket-header">
+                <h1>Ticket Management</h1>
+                <a href="/tickets.php?action=create" class="btn-create">+ Create New Ticket</a>
+            </div>
+
+            <div class="tickets-grid">
+                {% for ticket in tickets %}
+                    <article class="ticket-card">
+                        <div class="ticket-card-header">
+                            <div>
+                                <h3>{{ ticket.title }}</h3>
+                                <span class="status-badge status-{{ ticket.status }}">
+                                    {% if ticket.status == 'in_progress' %}
+                                        In Progress
+                                    {% else %}
+                                        {{ ticket.status|capitalize }}
+                                    {% endif %}
+                                </span>
+                            </div>
+                        </div>
+                        <p class="ticket-description">{{ ticket.description }}</p>
+                        <div class="ticket-actions">
+                            <a href="/tickets.php?action=edit&id={{ ticket.id }}" class="btn-edit">Edit</a>
+                            <a href="/tickets.php?action=delete&id={{ ticket.id }}" class="btn-delete" onclick="return confirm('Are you sure you want to delete this ticket?')">Delete</a>
+                        </div>
+                    </article>
+                {% else %}
+                    <p>No tickets found. Create your first ticket!</p>
+                {% endfor %}
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 TicketFlow. Built with passion.</p>
+        </div>
+    </footer>
+
+    {# Create/Edit Modal #}
+    {% if show_modal %}
+    <div class="modal-overlay" onclick="if(event.target === this) window.location.href='/tickets.php'">
+        <div class="modal">
+            <h2>{% if current_ticket %}Edit Ticket{% else %}Create New Ticket{% endif %}</h2>
+            <form method="POST" action="/ticketflow/tickets.php">
+                <input type="hidden" name="action" value="{% if current_ticket %}update{% else %}create{% endif %}">
+                {% if current_ticket %}
+                    <input type="hidden" name="id" value="{{ current_ticket.id }}">
+                {% endif %}
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="title">Title *</label>
+                        <input
+                            type="text"
+                            id="title"
+                            name="title"
+                            placeholder="Enter ticket title"
+                            value="{{ form_data.title|default('') }}"
+                        >
+                        {% if errors.title %}
+                            <div class="error-message show">{{ errors.title }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label for="status">Status *</label>
+                        <select id="status" name="status">
+                            <option value="">Select status</option>
+                            <option value="open" {% if form_data.status == 'open' %}selected{% endif %}>Open</option>
+                            <option value="in_progress" {% if form_data.status == 'in_progress' %}selected{% endif %}>In Progress</option>
+                            <option value="closed" {% if form_data.status == 'closed' %}selected{% endif %}>Closed</option>
+                        </select>
+                        {% if errors.status %}
+                            <div class="error-message show">{{ errors.status }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea
+                        id="description"
+                        name="description"
+                        placeholder="Describe the ticket..."
+                    >{{ form_data.description|default('') }}</textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="priority">Priority</label>
+                    <select id="priority" name="priority">
+                        <option value="">Select priority</option>
+                        <option value="low" {% if form_data.priority == 'low' %}selected{% endif %}>Low</option>
+                        <option value="medium" {% if form_data.priority == 'medium' %}selected{% endif %}>Medium</option>
+                        <option value="high" {% if form_data.priority == 'high' %}selected{% endif %}>High</option>
+                    </select>
+                </div>
+
+                <div class="modal-actions">
+                    <a href="/tickets.php" class="btn-cancel">Cancel</a>
+                    <button type="submit" class="btn-save">Save Ticket</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    {% endif %}
+
+    {# Toast Notification #}
+    {% if toast.message %}
+    <div class="toast show {{ toast.type }}">
+        {{ toast.message }}
+    </div>
+    <script>
+        setTimeout(function() {
+            document.querySelector('.toast').classList.remove('show');
+        }, 3000);
+    </script>
+    {% endif %}
+</div>
+{% endblock %}

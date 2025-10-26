@@ -1,0 +1,70 @@
+{% extends "layout.twig" %}
+
+{% block title %}Login - TicketFlow{% endblock %}
+
+{% block content %}
+<div class="auth-page">
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-content">
+                    <a href="/index.php" class="logo">TicketFlow</a>
+                    <div class="nav-buttons">
+                        <a href="/signup.php" class="btn-start">Get Started</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="auth-container">
+        <div class="container">
+            <article class="auth-box">
+                <h2>Welcome Back</h2>
+                <p>Login to access your tickets</p>
+                
+                <form method="POST" action="/login.php">
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Enter your email"
+                            value="{{ old.email|default('') }}"
+                        >
+                        {% if errors.email %}
+                            <div class="error-message show">{{ errors.email }}</div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Enter your password"
+                        >
+                        {% if errors.password %}
+                            <div class="error-message show">{{ errors.password }}</div>
+                        {% endif %}
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Login</button>
+                </form>
+                
+                <p class="auth-link">
+                    Don't have an account? <a href="/signup.php">Sign up</a>
+                </p>
+            </article>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 TicketFlow. Built with passion.</p>
+        </div>
+    </footer>
+</div>
+{% endblock %}

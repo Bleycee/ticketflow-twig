@@ -1,0 +1,75 @@
+{% extends "/layout.twig" %}
+
+{% block title %}Dashboard - TicketFlow{% endblock %}
+
+{% block content %}
+<div class="dashboard-page">
+    <header>
+        <nav class="navbar">
+            <div class="container">{% extends "/layout.twig" %}
+
+{% block title %}Dashboard - TicketFlow{% endblock %}
+
+{% block content %}
+<div class="dashboard-page">
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-content">
+                    <a href="/dashboard.php" class="logo">TicketFlow</a>
+                    <div class="nav-buttons">
+                        <a href="/tickets.php" class="btn-start">View Tickets</a>
+                        <a href="/logout.php" class="btn-logout">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="dashboard-header">
+            <div class="container">
+                <h1>Dashboard</h1>
+                <p>Here's an overview of your ticket status</p>
+            </div>
+        </section>
+
+        <section class="dashboard-content">
+            <div class="container">
+                <div class="stats-grid">
+                    <article class="stat-card">
+                        <h3>Total Tickets</h3>
+                        <div class="stat-number">{{ stats.total|default(0) }}</div>
+                    </article>
+                    <article class="stat-card">
+                        <h3>Open Tickets</h3>
+                        <div class="stat-number">{{ stats.open|default(0) }}</div>
+                    </article>
+                    <article class="stat-card">
+                        <h3>In Progress</h3>
+                        <div class="stat-number">{{ stats.in_progress|default(0) }}</div>
+                    </article>
+                    <article class="stat-card">
+                        <h3>Resolved</h3>
+                        <div class="stat-number">{{ stats.resolved|default(0) }}</div>
+                    </article>
+                </div>
+
+                <article class="quick-actions">
+                    <h2>Quick Actions</h2>
+                    <p>Jump to ticket management to create, edit, or view tickets</p>
+                    <a href="/tickets.php" class="btn-action">Go to Ticket Management</a>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 TicketFlow. Built with passion.</p>
+        </div>
+    </footer>
+</div>
+{% endblock %}
+                <div class="nav-content">
+                    <a href="/dashboard.php" class="logo">TicketFlow
