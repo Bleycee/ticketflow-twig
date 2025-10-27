@@ -1,84 +1,71 @@
 {% extends "layout.twig" %}
 
-{% block title %}Sign Up - TicketFlow{% endblock %}
+{% block title %}Sign Up - TicketFlow
+{% endblock %}
 
 {% block content %}
-<div class="auth-page">
-    <header>
-        <nav class="navbar">
-            <div class="container">
-                <div class="nav-content">
-                    <a href="/index.php" class="logo">TicketFlow</a>
-                    <div class="nav-buttons">
-                        <a href="/login.php" class="btn-login">Login</a>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </header>
+	<div class="auth-page">
+    
+		<header>
+			<nav class="navbar">
+				<div class="container">
+					<div class="nav-content">
+						<a href="/index.php" class="logo">TicketFlow</a>
+						
+						<div class="nav-buttons">
+							<a href="/login.php" class="btn-login">Login</a>
+						</div>
+					</div>
+				</div>
+			</nav>
+		</header>
 
-    <main class="auth-container">
-        <div class="container">
-            <article class="auth-box">
-                <h2>Get Started</h2>
-                <p>Create your account to start managing tickets</p>
-                
-                <form method="POST" action="/signup.php">
-                    <div class="form-group">
-                        <label for="name">Full Name</label>
-                        <input
-                            type="text"
-                            id="name"
-                            name="name"
-                            placeholder="Enter your full name"
-                            value="{{ old.name|default('') }}"
-                        >
-                        {% if errors.name %}
-                            <div class="error-message show">{{ errors.name }}</div>
-                        {% endif %}
-                    </div>
+		<main class="auth-container">
+			<div class="container">
+				<article class="auth-box">
+					<h2>Get Started</h2>
+					<p>Create your account to start managing tickets</p>
 
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            placeholder="Enter your email"
-                            value="{{ old.email|default('') }}"
-                        >
-                        {% if errors.email %}
-                            <div class="error-message show">{{ errors.email }}</div>
-                        {% endif %}
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            placeholder="Create a password"
-                        >
-                        {% if errors.password %}
-                            <div class="error-message show">{{ errors.password }}</div>
-                        {% endif %}
-                    </div>
-                    
-                    <button type="submit" class="submit-btn">Create Account</button>
-                </form>
-                
-                <p class="auth-link">
-                    Already have an account? <a href="/login.php">Login</a>
-                </p>
-            </article>
-        </div>
-    </main>
+					<form method="POST" action="/signup.php">
+						<div class="form-group">
+							<label for="name">Full Name</label>
+							<input type="text" id="name" name="name" placeholder="Enter your full name" value="{{ old.name|default('') }}">
+							{% if errors.name %}
+								<div class="error-message show">{{ errors.name }}</div>
+							{% endif %}
+						</div>
 
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 TicketFlow. Built with passion.</p>
-        </div>
-    </footer>
-</div>
+						<div class="form-group">
+							<label for="email">Email Address</label>
+							<input type="email" id="email" name="email" placeholder="Enter your email" value="{{ old.email|default('') }}">
+							{% if errors.email %}
+								<div class="error-message show">{{ errors.email }}</div>
+							{% endif %}
+						</div>
+
+						<div class="form-group">
+							<label for="password">Password</label>
+							<input type="password" id="password" name="password" placeholder="Create a password">
+							{% if errors.password %}
+								<div class="error-message show">{{ errors.password }}</div>
+							{% endif %}
+						</div>
+
+						<button type="submit" class="submit-btn">Create Account</button>
+					</form>
+
+					<p class="auth-link">
+						Already have an account?
+						<a href="/login.php">Login</a>
+					</p>
+				</article>
+			</div>
+		</main>
+
+		<footer class="footer">
+			<div class="container">
+				<p>&copy; 2025 TicketFlow. Built with passion.</p>
+			</div>
+		</footer>
+	</div>
 {% endblock %}

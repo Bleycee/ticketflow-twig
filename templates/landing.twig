@@ -4,12 +4,23 @@
 
 {% block content %}
 <div class="landing-page">
+    <!-- Mobile Menu Overlay -->
+    <div class="nav-overlay"></div>
+
     <!-- Header with Navigation -->
     <header>
         <nav class="navbar">
             <div class="container">
                 <div class="nav-content">
                     <a href="/index.php" class="logo">TicketFlow</a>
+                    
+                    <!-- Hamburger Menu Icon -->
+                    <button class="menu-toggle" aria-label="Toggle menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    
                     <div class="nav-buttons">
                         <a href="/login.php" class="btn-login">Login</a>
                         <a href="/signup.php" class="btn-start">Get Started</a>

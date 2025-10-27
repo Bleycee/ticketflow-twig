@@ -44,6 +44,80 @@ a.logo:hover {
   color: #ff5722;
 }
 
+/* Replace your Navigation section in style.css with this */
+
+/* ============================================
+   NAVIGATION
+   ============================================ */
+
+.navbar {
+  background: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  padding: 20px 0;
+  position: relative;
+}
+
+.nav-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: 700;
+  color: #ff5722;
+  z-index: 1001;
+}
+
+a.logo {
+  border: none;
+  text-decoration: none;
+  color: #ff5722;
+}
+
+a.logo:hover {
+  color: #ff5722;
+}
+
+/* Hamburger Menu Icon - Only on landing page */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  z-index: 1001;
+  background: none;
+  border: none;
+  padding: 3px;
+}
+
+.menu-toggle span {
+  width: 25px;
+  height: 3px;
+  background: #ff5722;
+  margin: 3px 0;
+  transition: all 0.3s;
+  border-radius: 2px;
+}
+
+.menu-toggle.active span:nth-child(1) {
+  transform: rotate(45deg) translate(7px, 7px);
+}
+
+.menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -7px);
+}
+
+/* Navigation Buttons */
+.nav-buttons {
+  display: flex;
+  align-items: center;
+}
+
 .nav-buttons a,
 .nav-buttons button {
   margin-left: 15px;
@@ -53,12 +127,15 @@ a.logo:hover {
   cursor: pointer;
   font-weight: 600;
   transition: all 0.3s;
+  white-space: nowrap;
 }
 
 .btn-login {
   background: transparent;
   color: #ff5722;
   border: 2px solid #ff5722;
+  display: inline-block;
+  text-decoration: none;
 }
 
 .btn-login:hover {
@@ -68,6 +145,8 @@ a.logo:hover {
 .btn-start {
   background: linear-gradient(135deg, #ff5722 0%, #ff6f3c 100%);
   color: white;
+  display: inline-block;
+  text-decoration: none;
 }
 
 .btn-start:hover {
@@ -75,6 +154,228 @@ a.logo:hover {
   box-shadow: 0 8px 16px rgba(255, 87, 34, 0.3);
 }
 
+.btn-logout {
+  background: #ef5350;
+  color: white;
+  padding: 10px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  margin-left: 15px;
+  transition: all 0.3s;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.btn-logout:hover {
+  background: #d32f2f;
+}
+
+/* Mobile Menu Overlay */
+.nav-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.nav-overlay.active {
+  display: block;
+  opacity: 1;
+}
+
+/* ============================================
+   MOBILE RESPONSIVE (< 768px)
+   ============================================ */
+
+@media (max-width: 768px) {
+  /* Show hamburger only on landing page */
+  .landing-page .menu-toggle {
+    display: flex;
+  }
+
+  /* Landing page mobile menu */
+  .landing-page .nav-buttons {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 200px;
+    height: auto;
+    min-height: 200px;
+    background: white;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    box-shadow: -2px 0 15px rgba(0,0,0,0.15);
+    transition: right 0.3s ease;
+    z-index: 1000;
+    padding: 70px 15px 20px 15px;
+    border-radius: 0 0 0 12px;
+  }
+
+  .landing-page .nav-buttons.active {
+    right: 0;
+  }
+
+  .landing-page .nav-buttons a {
+    margin: 8px 0;
+    margin-left: 0;
+    width: 100%;
+    text-align: center;
+    padding: 12px 20px;
+    font-size: 15px;
+  }
+
+  /* Other pages - simple responsive navbar */
+  .auth-page .nav-buttons,
+  .dashboard-page .nav-buttons,
+  .ticket-page .nav-buttons {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .auth-page .nav-buttons a,
+  .dashboard-page .nav-buttons a,
+  .ticket-page .nav-buttons a {
+    margin-left: 0;
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  /* Adjust hero for mobile */
+  .hero h1 {
+    font-size: 32px;
+  }
+  
+  .hero p {
+    font-size: 16px;
+  }
+  
+  .hero-buttons a {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    text-align: center;
+  }
+  
+  .circle-1, 
+  .circle-2 {
+    display: none;
+  }
+
+  /* Mobile ticket grid */
+  .tickets-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Mobile form rows */
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  /* Mobile ticket header */
+  .ticket-header {
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+  }
+  
+  .btn-create {
+    width: 100%;
+  }
+
+  /* Mobile stats grid */
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Mobile auth box */
+  .auth-box {
+    padding: 30px 20px;
+  }
+}
+
+/* Tablet adjustments (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .tickets-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+  /* Adjust hero for mobile */
+  .hero h1 {
+    font-size: 32px;
+  }
+  
+  .hero p {
+    font-size: 16px;
+  }
+  
+  .hero-buttons a {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    text-align: center;
+  }
+  
+  .circle-1, 
+  .circle-2 {
+    display: none;
+  }
+
+  /* Mobile ticket grid */
+  .tickets-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Mobile form rows */
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  /* Mobile ticket header */
+  .ticket-header {
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+  }
+  
+  .btn-create {
+    width: 100%;
+  }
+
+  /* Mobile stats grid */
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Mobile auth box */
+  .auth-box {
+    padding: 30px 20px;
+  }
+
+
+/* Tablet adjustments (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .tickets-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 /* Hero Section */
 .hero {
   position: relative;

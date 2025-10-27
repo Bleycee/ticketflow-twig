@@ -64,7 +64,7 @@
     <div class="modal-overlay" onclick="if(event.target === this) window.location.href='/tickets.php'">
         <div class="modal">
             <h2>{% if current_ticket %}Edit Ticket{% else %}Create New Ticket{% endif %}</h2>
-            <form method="POST" action="/ticketflow/tickets.php">
+            <form method="POST" action="/tickets.php">
                 <input type="hidden" name="action" value="{% if current_ticket %}update{% else %}create{% endif %}">
                 {% if current_ticket %}
                     <input type="hidden" name="id" value="{{ current_ticket.id }}">
