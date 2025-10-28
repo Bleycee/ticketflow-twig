@@ -4,24 +4,29 @@
 
 {% block content %}
 <div class="landing-page">
-    <!-- Mobile Menu Overlay -->
-    <div class="nav-overlay"></div>
-
-    <!-- Header with Navigation -->
-    <header>
-        <nav class="navbar">
+    
+    {# Nav Overlay removed as it's not needed with the current CSS approach #}
+    
+    {# 
+        HEADER & NAVIGATION - Using the structure defined in _navbar.html.twig 
+        This is the responsive structure that relies on JS and global CSS 
+        to handle the mobile hamburger menu toggle.
+    #}
+    <header class="landing-header">
+        <nav class="landing-navbar">
             <div class="container">
-                <div class="nav-content">
-                    <a href="/index.php" class="logo">TicketFlow</a>
-                    
-                    <!-- Hamburger Menu Icon -->
-                    <button class="menu-toggle" aria-label="Toggle menu">
+                <div class="landing-nav-content">
+                    <a href="/index.php" class="landing-logo">TicketFlow</a>
+
+                    {# Hamburger Icon (Toggled by JS) #}
+                    <div id="landing-hamburger-toggle" class="landing-hamburger" aria-controls="landing-nav-menu" aria-expanded="false">
                         <span></span>
                         <span></span>
                         <span></span>
-                    </button>
-                    
-                    <div class="nav-buttons">
+                    </div>
+
+                    {# Nav Buttons (Toggled by JS) #}
+                    <div id="landing-nav-menu" class="landing-nav-buttons">
                         <a href="/login.php" class="btn-login">Login</a>
                         <a href="/signup.php" class="btn-start">Get Started</a>
                     </div>
@@ -107,4 +112,36 @@
         </div>
     </footer>
 </div>
+
+{# 
+    JAVASCRIPT FOR TWIG: This script must run after the DOM content 
+    is loaded to enable the mobile menu functionality.
+#}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const hamburger = document.getElementById('landing-hamburger-toggle');
+        const navMenu = document.getElementById('landing-nav-menu');
+
+        if (hamburger && navMenu) {
+            hamburger.addEventListener('click', function() {
+                // Toggle 'active' class on the icon (for the X animation)
+                hamburger.classList.toggle('active');
+                hamburger.setAttribute('aria-expanded', hamburger.classList.contains('active'));
+                
+                // Toggle 'open' class on the menu container (for visibility)
+                navMenu.classList.toggle('open');
+            });
+
+            // Close menu when a navigation link is clicked
+            const links = navMenu.querySelectorAll('a');
+            links.forEach(link => {
+                link.addEventListener('click', function() {
+                    hamburger.classList.remove('active');
+                    hamburger.setAttribute('aria-expanded', 'false');
+                    navMenu.classList.remove('open');
+                });
+            });
+        }
+    });
+</script>
 {% endblock %}
